@@ -16,8 +16,20 @@
 
 package org.springframework.samples.petclinic;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.event.EventListener;
+import org.springframework.samples.petclinic.vet.SpecialityRepository;
+import org.springframework.samples.petclinic.vet.Specialty;
+import org.springframework.samples.petclinic.vet.Vet;
+import org.springframework.samples.petclinic.vet.VetRepository;
+
+import java.beans.BeanProperty;
 
 /**
  * PetClinic Spring Boot Application.
@@ -26,10 +38,63 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
+@Slf4j
 public class PetClinicApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PetClinicApplication.class, args);
+	}
+	// Practica
+
+	@Bean
+	public CommandLineRunner demoVetRepository(VetRepository vetRepository, SpecialityRepository specialityRepository) {
+
+		return (args) -> {
+			System.out.println("Texto");
+			log.info("*****************************************************");
+
+			log.info("BOOTCAMP - Spring y Spring Data - vetRepository");
+
+			log.info("*****************************************************");
+
+			log.info("Creamos un objeto Vet");
+
+			Vet vet = new Vet();
+
+			vet.setFirstName("Sergio");
+
+			vet.setLastName("Raposo Vargas");
+
+			log.info("Persistimos en BBDD");
+
+			vet = vetRepository.save(vet);
+
+			log.info("Comprobamos que se ha creado correctamente");
+
+			Vet vetAux = vetRepository.findById(vet.getId());
+
+			log.info(vetAux.toString());
+
+			log.info("Editamos el objeto y añadimos una Speciality");
+
+			Specialty s = specialityRepository.findById(1);
+
+			vet.addSpecialty(s);
+
+			vet = vetRepository.save(vet);
+
+			log.info(vet.toString());
+
+			log.info("Listamos todos los veterinarios");
+
+			for (Vet v : vetRepository.findAll()) {
+
+				log.info("Vet: " + v.getFirstName());
+
+			}
+
+		};
+
 	}
 
 }

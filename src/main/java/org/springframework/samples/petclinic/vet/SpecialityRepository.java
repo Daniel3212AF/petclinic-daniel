@@ -15,30 +15,11 @@
  */
 package org.springframework.samples.petclinic.vet;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 
-import lombok.Data;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.annotation.Id;
-import org.springframework.samples.petclinic.model.NamedEntity;
+public interface SpecialityRepository extends Repository<Specialty, Integer> {
 
-/**
- * Models a {@link Vet Vet's} specialty (for example, dentistry).
- *
- * @author Juergen Hoeller
- */
-@Entity
-@Data
-@Table(name = "specialties")
-public class Specialty extends NamedEntity {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Integer id;
-
-	String name;
+	Specialty findById(Integer id);
 
 }
