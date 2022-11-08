@@ -13,32 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.vet;
+package org.springframework.samples.petclinic.owner.dto;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
-import lombok.Data;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.annotation.Id;
 import org.springframework.samples.petclinic.model.NamedEntity;
 
 /**
- * Models a {@link Vet Vet's} specialty (for example, dentistry).
- *
- * @author Juergen Hoeller
+ * @author Juergen Hoeller Can be Cat, Dog, Hamster...
  */
 @Entity
-@Data
-@Table(name = "specialties")
-public class Specialty extends NamedEntity {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Integer id;
-
-	String name;
+@Table(name = "types")
+public class PetType extends NamedEntity {
 
 }

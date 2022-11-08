@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.vet;
+package org.springframework.samples.petclinic.vet.dao;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.samples.petclinic.vet.dto.Vet;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Repository class for <code>Vet</code> domain objects All method names are compliant
@@ -58,5 +61,8 @@ public interface VetRepository extends Repository<Vet, Integer> {
 	Vet findById(Integer id);
 
 	Vet save(Vet vet);
+
+	@Query("SELECT DISTINCT v FROM Vet v JOIN FETCH v.specialties s WHERE s.name = 'radiology'")
+	List<Vet> buscarPorRadiology();
 
 }

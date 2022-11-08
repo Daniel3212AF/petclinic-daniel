@@ -17,19 +17,14 @@
 package org.springframework.samples.petclinic;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.event.EventListener;
-import org.springframework.samples.petclinic.vet.SpecialityRepository;
-import org.springframework.samples.petclinic.vet.Specialty;
-import org.springframework.samples.petclinic.vet.Vet;
-import org.springframework.samples.petclinic.vet.VetRepository;
-
-import java.beans.BeanProperty;
+import org.springframework.samples.petclinic.vet.dao.SpecialityRepository;
+import org.springframework.samples.petclinic.vet.dto.Specialty;
+import org.springframework.samples.petclinic.vet.dto.Vet;
+import org.springframework.samples.petclinic.vet.dao.VetRepository;
 
 /**
  * PetClinic Spring Boot Application.
@@ -90,6 +85,12 @@ public class PetClinicApplication {
 			for (Vet v : vetRepository.findAll()) {
 
 				log.info("Vet: " + v.getFirstName());
+
+			}
+
+			for (Vet v : vetRepository.buscarPorRadiology()) {
+
+				log.info("Vet: " + v.getFirstName() + "Especialidad " + v.getSpecialties());
 
 			}
 
