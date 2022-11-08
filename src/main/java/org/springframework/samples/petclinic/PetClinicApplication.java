@@ -21,10 +21,20 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.samples.petclinic.owner.dao.PetRepository;
+import org.springframework.samples.petclinic.owner.dao.VisitRepository;
+import org.springframework.samples.petclinic.owner.dto.Pet;
+import org.springframework.samples.petclinic.owner.dto.PetType;
+import org.springframework.samples.petclinic.owner.dto.Visit;
 import org.springframework.samples.petclinic.vet.dao.SpecialityRepository;
 import org.springframework.samples.petclinic.vet.dto.Specialty;
 import org.springframework.samples.petclinic.vet.dto.Vet;
 import org.springframework.samples.petclinic.vet.dao.VetRepository;
+
+import java.awt.print.Pageable;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * PetClinic Spring Boot Application.
@@ -42,7 +52,8 @@ public class PetClinicApplication {
 	// Practica
 
 	@Bean
-	public CommandLineRunner demoVetRepository(VetRepository vetRepository, SpecialityRepository specialityRepository) {
+	public CommandLineRunner demoVetRepository(VetRepository vetRepository, SpecialityRepository specialityRepository,
+			PetRepository pr, VisitRepository vr) {
 
 		return (args) -> {
 			System.out.println("Texto");
@@ -61,6 +72,8 @@ public class PetClinicApplication {
 			vet.setLastName("Raposo Vargas");
 
 			log.info("Persistimos en BBDD");
+
+			vetRepository.BorrarPorNombre("Sergio");
 
 			vet = vetRepository.save(vet);
 
@@ -94,6 +107,39 @@ public class PetClinicApplication {
 
 			}
 
+			// Obtener las mascotas nacidas en 2010 ordenadas por fecha de nacimiento
+			// ascendente
+			log.info("Obtener las mascotas nacidas en 2010 ordenadas por fecha de nacimiento ascendente");
+			for (Pet v : pr.buscarPorOrden(LocalDate.parse("2010-01-01"), LocalDate.parse("2010-12-21"))) {
+
+				log.info(v.toString());
+
+			}
+
+			// Crear 3 visitas nuevas para diferentes mascotas
+			log.info("Crear 3 visitas nuevas para diferentes mascotas");
+			Pet pet = pr.findById(2);
+			Visit visit = new Visit(LocalDate.parse("2023-11-08"), "prueba1");
+			pet.addVisit(visit);
+			visit = new Visit(LocalDate.parse("2022-11-10"), "prueba2");
+			pet.addVisit(visit);
+			visit = new Visit(LocalDate.parse("2022-11-12"), "prueba3");
+			pet.addVisit(visit);
+			pr.save(pet);
+
+			// Obtener todas las visitas para una mascota
+			log.info("Obtener todas las visitas para una mascota");
+			pet = pr.findById(1);
+
+			for (Visit visit2 : pet.getVisits()) {
+				log.info(visit2.toString());
+			}
+
+			log.info("Obtener las 4 visitas más recientes de todo el sistema");
+			// Obtener las 4 visitas más recientes de todo el sistema
+			for (Visit visit3 : vr.buscarUltimas(PageRequest.of(0, 4))) {
+				log.info(visit3.toString());
+			}
 		};
 
 	}

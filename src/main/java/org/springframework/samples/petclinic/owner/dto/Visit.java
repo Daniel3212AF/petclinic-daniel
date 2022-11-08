@@ -22,6 +22,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.model.BaseEntity;
 
@@ -32,6 +34,7 @@ import org.springframework.samples.petclinic.model.BaseEntity;
  * @author Dave Syer
  */
 @Entity
+@AllArgsConstructor
 @Table(name = "visits")
 public class Visit extends BaseEntity {
 
@@ -63,6 +66,11 @@ public class Visit extends BaseEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Visit{" + "date=" + date + ", description='" + description + '\'' + '}';
 	}
 
 }

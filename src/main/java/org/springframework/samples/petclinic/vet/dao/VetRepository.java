@@ -19,8 +19,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.owner.dto.Owner;
 import org.springframework.samples.petclinic.vet.dto.Vet;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,5 +67,10 @@ public interface VetRepository extends Repository<Vet, Integer> {
 
 	@Query("SELECT DISTINCT v FROM Vet v JOIN FETCH v.specialties s WHERE s.name = 'radiology'")
 	List<Vet> buscarPorRadiology();
+
+	@Modifying
+	@Transactional
+	@Query("DELETE FROM Vet vet WHERE vet.firstName = :nombre")
+	Integer BorrarPorNombre(@Param("nombre") String nombre);
 
 }
