@@ -48,97 +48,100 @@ public class PetClinicApplication {
 	}
 	// Practica
 
-	@Bean
-	public CommandLineRunner demoVetRepository(VetRepository vetRepository, SpecialityRepository specialityRepository,
-			PetRepository pr, VisitRepository vr) {
-
-		return (args) -> {
-			System.out.println("Texto");
-			log.info("*****************************************************");
-
-			log.info("BOOTCAMP - Spring y Spring Data - vetRepository");
-
-			log.info("*****************************************************");
-
-			log.info("Creamos un objeto Vet");
-
-			Vet vet = new Vet();
-
-			vet.setFirstName("Sergio");
-
-			vet.setLastName("Raposo Vargas");
-
-			log.info("Persistimos en BBDD");
-
-			vetRepository.BorrarPorNombre("Sergio");
-
-			vet = vetRepository.save(vet);
-
-			log.info("Comprobamos que se ha creado correctamente");
-
-			Vet vetAux = vetRepository.findById(vet.getId());
-
-			log.info(vetAux.toString());
-
-			log.info("Editamos el objeto y añadimos una Speciality");
-
-			Specialty s = specialityRepository.findById(1);
-
-			vet.addSpecialty(s);
-
-			vet = vetRepository.save(vet);
-
-			log.info(vet.toString());
-
-			log.info("Listamos todos los veterinarios");
-
-			for (Vet v : vetRepository.findAll()) {
-
-				log.info("Vet: " + v.getFirstName());
-
-			}
-
-			for (Vet v : vetRepository.buscarPorRadiology()) {
-
-				log.info("Vet: " + v.getFirstName() + "Especialidad " + v.getSpecialties());
-
-			}
-
-			// Obtener las mascotas nacidas en 2010 ordenadas por fecha de nacimiento
-			// ascendente
-			log.info("Obtener las mascotas nacidas en 2010 ordenadas por fecha de nacimiento ascendente");
-			for (Pet v : pr.buscarPorOrden(LocalDate.parse("2010-01-01"), LocalDate.parse("2010-12-31"))) {
-
-				log.info(v.toString());
-
-			}
-
-			// Crear 3 visitas nuevas para diferentes mascotas
-			log.info("Crear 3 visitas nuevas para diferentes mascotas");
-			Pet pet = pr.findById(2);
-			Visit visit = new Visit(LocalDate.parse("2023-11-08"), "prueba1");
-			pet.addVisit(visit);
-			visit = new Visit(LocalDate.parse("2022-11-10"), "prueba2");
-			pet.addVisit(visit);
-			visit = new Visit(LocalDate.parse("2022-11-12"), "prueba3");
-			pet.addVisit(visit);
-			pr.save(pet);
-
-			// Obtener todas las visitas para una mascota
-			log.info("Obtener todas las visitas para una mascota");
-			pet = pr.findById(1);
-
-			for (Visit visit2 : pet.getVisits()) {
-				log.info(visit2.toString());
-			}
-
-			log.info("Obtener las 4 visitas más recientes de todo el sistema");
-			// Obtener las 4 visitas más recientes de todo el sistema
-			for (Visit visit3 : vr.buscarUltimas(PageRequest.of(0, 4))) {
-				log.info(visit3.toString());
-			}
-		};
-
-	}
+	// @Bean
+	// public CommandLineRunner demoVetRepository(VetRepository vetRepository,
+	// SpecialityRepository specialityRepository,
+	// PetRepository pr, VisitRepository vr) {
+	//
+	// return (args) -> {
+	// System.out.println("Texto");
+	// log.info("*****************************************************");
+	//
+	// log.info("BOOTCAMP - Spring y Spring Data - vetRepository");
+	//
+	// log.info("*****************************************************");
+	//
+	// log.info("Creamos un objeto Vet");
+	//
+	// Vet vet = new Vet();
+	//
+	// vet.setFirstName("Sergio");
+	//
+	// vet.setLastName("Raposo Vargas");
+	//
+	// log.info("Persistimos en BBDD");
+	//
+	// vetRepository.BorrarPorNombre("Sergio");
+	//
+	// vet = vetRepository.save(vet);
+	//
+	// log.info("Comprobamos que se ha creado correctamente");
+	//
+	// Vet vetAux = vetRepository.findById(vet.getId());
+	//
+	// log.info(vetAux.toString());
+	//
+	// log.info("Editamos el objeto y añadimos una Speciality");
+	//
+	// Specialty s = specialityRepository.findById(1);
+	//
+	// vet.addSpecialty(s);
+	//
+	// vet = vetRepository.save(vet);
+	//
+	// log.info(vet.toString());
+	//
+	// log.info("Listamos todos los veterinarios");
+	//
+	// for (Vet v : vetRepository.findAll()) {
+	//
+	// log.info("Vet: " + v.getFirstName());
+	//
+	// }
+	//
+	// for (Vet v : vetRepository.buscarPorRadiology()) {
+	//
+	// log.info("Vet: " + v.getFirstName() + "Especialidad " + v.getSpecialties());
+	//
+	// }
+	//
+	// // Obtener las mascotas nacidas en 2010 ordenadas por fecha de nacimiento
+	// // ascendente
+	// log.info("Obtener las mascotas nacidas en 2010 ordenadas por fecha de nacimiento
+	// ascendente");
+	// for (Pet v : pr.buscarPorOrden(LocalDate.parse("2010-01-01"),
+	// LocalDate.parse("2010-12-31"))) {
+	//
+	// log.info(v.toString());
+	//
+	// }
+	//
+	// // Crear 3 visitas nuevas para diferentes mascotas
+	// log.info("Crear 3 visitas nuevas para diferentes mascotas");
+	// Pet pet = pr.findById(2);
+	// Visit visit = new Visit(LocalDate.parse("2023-11-08"), "prueba1");
+	// pet.addVisit(visit);
+	// visit = new Visit(LocalDate.parse("2022-11-10"), "prueba2");
+	// pet.addVisit(visit);
+	// visit = new Visit(LocalDate.parse("2022-11-12"), "prueba3");
+	// pet.addVisit(visit);
+	// pr.save(pet);
+	//
+	// // Obtener todas las visitas para una mascota
+	// log.info("Obtener todas las visitas para una mascota");
+	// pet = pr.findById(1);
+	//
+	// for (Visit visit2 : pet.getVisits()) {
+	// log.info(visit2.toString());
+	// }
+	//
+	// log.info("Obtener las 4 visitas más recientes de todo el sistema");
+	// // Obtener las 4 visitas más recientes de todo el sistema
+	// for (Visit visit3 : vr.buscarUltimas(PageRequest.of(0, 4))) {
+	// log.info(visit3.toString());
+	// }
+	// };
+	//
+	// }
 
 }

@@ -39,4 +39,6 @@ public interface VisitRepository extends Repository<Visit, Integer> {
 	@Query("SELECT visit FROM Visit visit ORDER BY visit.date DESC")
 	List<Visit> buscarUltimas(PageRequest pageable);
 
+	Visit findById(Integer id);
+
 }

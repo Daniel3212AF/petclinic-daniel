@@ -19,12 +19,14 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.samples.petclinic.bill.dto.Bill;
 import org.springframework.samples.petclinic.model.BaseEntity;
 
 /**
@@ -44,6 +46,10 @@ public class Visit extends BaseEntity {
 
 	@NotEmpty
 	private String description;
+
+	// @OneToOne
+	// @JoinColumn(name = "id_bill")
+	// private Bill bill;
 
 	/**
 	 * Creates a new instance of Visit for the current date
