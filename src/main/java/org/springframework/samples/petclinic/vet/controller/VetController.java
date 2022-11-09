@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 class VetController {
 
 	@Autowired
-	public VetService vetRepository;
+	private VetService vetRepository;
 
 	@GetMapping("/vets.html")
 	public String showVetList(@RequestParam(defaultValue = "1") int page, Model model) {

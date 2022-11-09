@@ -13,19 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner.dao;
+package org.springframework.samples.petclinic.pet.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.data.repository.cdi.Eager;
-import org.springframework.samples.petclinic.owner.dto.Owner;
-import org.springframework.samples.petclinic.owner.dto.Pet;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.samples.petclinic.pet.dto.Pet;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Repository class for <code>Owner</code> domain objects All method names are compliant
@@ -50,6 +45,5 @@ public interface PetRepository extends Repository<Pet, Integer> {
 
 	@Query("SELECT pet FROM Pet pet WHERE id = ?1")
 	Pet buscarMascotaVisitas(Integer id);
-
 
 }

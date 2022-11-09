@@ -31,7 +31,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.samples.petclinic.owner.controller.VisitController;
 import org.springframework.samples.petclinic.owner.dao.OwnerRepository;
 import org.springframework.samples.petclinic.owner.dto.Owner;
-import org.springframework.samples.petclinic.owner.dto.Pet;
+import org.springframework.samples.petclinic.pet.dto.Pet;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**

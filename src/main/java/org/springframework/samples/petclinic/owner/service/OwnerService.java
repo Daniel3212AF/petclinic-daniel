@@ -3,10 +3,9 @@ package org.springframework.samples.petclinic.owner.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.owner.dao.OwnerRepository;
 import org.springframework.samples.petclinic.owner.dto.Owner;
-import org.springframework.samples.petclinic.owner.dto.PetType;
+import org.springframework.samples.petclinic.pet.dto.PetType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,26 +14,26 @@ import java.util.List;
 public class OwnerService {
 
 	@Autowired
-	public OwnerRepository or;
+	private OwnerRepository or;
 
 	public List<PetType> findPetTypes() {
-		return or.findPetTypes();
+		return this.or.findPetTypes();
 	}
 
 	public Page<Owner> findByLastName(String lastName, Pageable pageable) {
-		return or.findByLastName(lastName, pageable);
+		return this.or.findByLastName(lastName, pageable);
 	}
 
 	public Owner findById(Integer id) {
-		return or.findById(id);
+		return this.or.findById(id);
 	}
 
 	public void save(Owner owner) {
-		or.save(owner);
+		this.or.save(owner);
 	}
 
 	public Page<Owner> findAll(Pageable pageable) {
-		return or.findAll(pageable);
+		return this.or.findAll(pageable);
 	}
 
 }

@@ -13,17 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner.controller;
+package org.springframework.samples.petclinic.visit.controller;
 
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.owner.dao.OwnerRepository;
 import org.springframework.samples.petclinic.owner.dto.Owner;
-import org.springframework.samples.petclinic.owner.dto.Pet;
-import org.springframework.samples.petclinic.owner.dto.Visit;
+import org.springframework.samples.petclinic.pet.dto.Pet;
+import org.springframework.samples.petclinic.visit.dto.Visit;
 import org.springframework.samples.petclinic.owner.service.OwnerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -45,7 +44,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 class VisitController {
 
 	@Autowired
-	public OwnerService owners;
+	private OwnerService owners;
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {

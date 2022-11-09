@@ -22,19 +22,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.samples.petclinic.owner.dao.PetRepository;
-import org.springframework.samples.petclinic.owner.dao.VisitRepository;
-import org.springframework.samples.petclinic.owner.dto.Pet;
-import org.springframework.samples.petclinic.owner.dto.PetType;
-import org.springframework.samples.petclinic.owner.dto.Visit;
+import org.springframework.samples.petclinic.pet.dao.PetRepository;
+import org.springframework.samples.petclinic.visit.dao.VisitRepository;
+import org.springframework.samples.petclinic.pet.dto.Pet;
+import org.springframework.samples.petclinic.visit.dto.Visit;
 import org.springframework.samples.petclinic.vet.dao.SpecialityRepository;
 import org.springframework.samples.petclinic.vet.dto.Specialty;
 import org.springframework.samples.petclinic.vet.dto.Vet;
 import org.springframework.samples.petclinic.vet.dao.VetRepository;
 
-import java.awt.print.Pageable;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * PetClinic Spring Boot Application.

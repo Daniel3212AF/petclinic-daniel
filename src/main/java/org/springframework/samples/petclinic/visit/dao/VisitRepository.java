@@ -13,16 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner.dao;
+package org.springframework.samples.petclinic.visit.dao;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.samples.petclinic.owner.dto.Pet;
-import org.springframework.samples.petclinic.owner.dto.Visit;
+import org.springframework.samples.petclinic.visit.dto.Visit;
 
-import java.awt.print.Pageable;
-import java.time.LocalDate;
 import java.util.List;
 
 /**

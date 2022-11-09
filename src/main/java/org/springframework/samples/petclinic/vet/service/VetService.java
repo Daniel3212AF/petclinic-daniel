@@ -14,7 +14,7 @@ import java.util.List;
 public class VetService {
 
 	@Autowired
-	VetRepository vr;
+	private VetRepository vr;
 
 	public Collection<Vet> findAll() {
 		return vr.findAll();
