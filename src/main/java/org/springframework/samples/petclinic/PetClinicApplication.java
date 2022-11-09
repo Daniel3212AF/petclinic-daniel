@@ -110,7 +110,7 @@ public class PetClinicApplication {
 			// Obtener las mascotas nacidas en 2010 ordenadas por fecha de nacimiento
 			// ascendente
 			log.info("Obtener las mascotas nacidas en 2010 ordenadas por fecha de nacimiento ascendente");
-			for (Pet v : pr.buscarPorOrden(LocalDate.parse("2010-01-01"), LocalDate.parse("2010-12-21"))) {
+			for (Pet v : pr.buscarPorOrden(LocalDate.parse("2010-01-01"), LocalDate.parse("2010-12-31"))) {
 
 				log.info(v.toString());
 

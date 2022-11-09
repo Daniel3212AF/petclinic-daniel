@@ -51,4 +51,5 @@ public interface PetRepository extends Repository<Pet, Integer> {
 	@Query("SELECT pet FROM Pet pet WHERE id = ?1")
 	Pet buscarMascotaVisitas(Integer id);
 
+
 }
